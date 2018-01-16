@@ -1,7 +1,5 @@
 package edu.knoldus
 
-import org.apache.log4j.Logger
-
 class Payment {
 
   def checkPaymentType(paymentType: String, amount: Int): Double = {
@@ -13,11 +11,5 @@ class Payment {
       case "cash" => amount
     }
   }
-
-}
-
-object Applications extends App{
-
-
 
 }

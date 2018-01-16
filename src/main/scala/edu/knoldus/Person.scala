@@ -13,9 +13,11 @@ class PersonType {
   def isGamer(): String = {
     def innerGamer(count: Int): String = {
       val r = scala.util.Random
-      val diceNumber = 1 + r.nextInt(6)
+      val startRange = 1
+      val endRange = 6
+      val diceNumber = startRange + r.nextInt(endRange)
       diceNumber match {
-        case 1 | 6 => if (count == 0) "Winner" else innerGamer(count - 1)
+        case startRange | endRange => if (count == 0) "Winner" else innerGamer(count - 1)
         case _ => "Loser"
       }
     }
@@ -24,7 +26,9 @@ class PersonType {
 
   def attendance(): String = {
     val r = scala.util.Random
-    (1 + r.nextInt(50)).toString
+    val startRange = 1
+    val endRange = 6
+    (startRange + r.nextInt(endRange)).toString
   }
 
   def checkType(person: Person): String = {
