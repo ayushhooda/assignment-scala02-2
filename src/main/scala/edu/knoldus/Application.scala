@@ -4,6 +4,13 @@ import org.apache.log4j.Logger
 
 object Application extends App {
 
+  // scalastyle:off
+  val ONE = 1
+  val SIX = 6
+  val FIFTY = 50
+  val FIVE = 5
+  // scalastyle:on
+
   val log = Logger.getLogger(this.getClass)
   val paymentObject = new Payment
   val amount: Int = 100
@@ -23,13 +30,18 @@ object Application extends App {
   log.info(s"Amount while using Card: $amountCard \n")
   log.info(s"Amount while using Cash: $amountCash \n")
 
-  val obj = new PersonType
+  val personObject = new PersonType
   val gamer = Gamer()
-  val gamerString = obj.checkType(gamer)
+  val gamerString = personObject.checkType(gamer)
   log.info(s"$gamerString \n")
 
   val trainer = Trainer()
-  val trainerString = obj.checkType(trainer)
+  val trainerString = personObject.checkType(trainer)
   log.info(s"$trainerString \n")
+
+  val initialMap = Map("Scala" -> 2, "Java" -> 5, "Kafka" -> 6)
+  val blogger = Blogger(initialMap)
+  val bloggerString = personObject.checkType(blogger)
+  log.info(s"$bloggerString \n")
 
 }
