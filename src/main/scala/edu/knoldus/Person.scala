@@ -6,7 +6,7 @@ case class Gamer() extends Person
 
 case class Trainer() extends Person
 
-case class Blogger() extends Person
+case class Blogger(blogList: Map[String, Int]) extends Person
 
 class PersonType {
 
@@ -17,10 +17,11 @@ class PersonType {
       val endRange = 6
       val diceNumber = startRange + r.nextInt(endRange)
       diceNumber match {
-        case startRange | endRange => if (count == 0) "Winner" else innerGamer(count - 1)
+        case Application.ONE | Application.SIX => if (count == 0) "Winner" else innerGamer(count - 1)
         case _ => "Loser"
       }
     }
+
     innerGamer(3)
   }
 
@@ -31,11 +32,24 @@ class PersonType {
     (startRange + r.nextInt(endRange)).toString
   }
 
+  def favouriteTechnology(map: Map[String, Int]): String = {
+    def innerFunction(map: Map[String, Int], count: Int): String = {
+      val random = scala.util.Random
+      val allKeys = map.keySet
+      val randomKey = allKeys.toVector(random.nextInt(allKeys.size))
+      count match {
+        case 0 => innerFunction(map.updated(randomKey, map(randomKey) + 1), count - 1)
+        case _ => map.valuesIterator.max.toString
+      }
+    }
+    innerFunction(map, Application.FIVE)
+  }
+
   def checkType(person: Person): String = {
     person match {
       case Gamer() => isGamer()
       case Trainer() => attendance()
-      case Blogger() => "bye"
+      case Blogger(map: Map[String, Int]) => favouriteTechnology(map)
     }
   }
 
